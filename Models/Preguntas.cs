@@ -16,7 +16,7 @@ namespace PreguntadORT_Chediex_Pascual.Models{
         private string _enunciado;
         private string _foto;
 
-        public Preguntas(int idCategoria int idDificultad, string enunciado, string foto)
+        public Preguntas(int idCategoria, int idDificultad, string enunciado, string foto)
         {
             _idCategoria=idCategoria;
             _idDificultad=idDificultad;
@@ -26,8 +26,9 @@ namespace PreguntadORT_Chediex_Pascual.Models{
 
         public Preguntas()
         {
-            _idDificultad = 0;
-            _nombre = "";
+            _idCategoria=0;
+            _idDificultad=0;
+            _enunciado = "";
             _foto="";
         }
 

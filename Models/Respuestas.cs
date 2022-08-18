@@ -19,7 +19,7 @@ namespace PreguntadORT_Chediex_Pascual.Models{
 
         public Respuestas(int idPregunta, int opcion, string contenido, bool correcta, string foto)
         {
-            _idCategoria = idPregunta;
+            _idPregunta = idPregunta;
             _opcion = opcion;
             _contenido = contenido;
             _correcta = correcta;
@@ -28,9 +28,11 @@ namespace PreguntadORT_Chediex_Pascual.Models{
 
         public Respuestas()
         {
-            _idDificultad = 0;
-            _nombre = "";
-            _foto="";
+            _idPregunta = 0;
+            _opcion = 0;
+            _contenido = "";
+            _correcta = false;
+            _foto = "";
         }
 
         public int IdPregunta
