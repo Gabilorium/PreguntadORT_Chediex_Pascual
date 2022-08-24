@@ -4,6 +4,8 @@ using System.Dynamic;
 using Microsoft.VisualBasic.CompilerServices;
 using System.Diagnostics;
 using System.Timers;
+using System.Data.SqlClient;
+using Dapper;
 
 namespace PreguntadORT_Chediex_Pascual.Models{
 
@@ -61,32 +63,56 @@ namespace PreguntadORT_Chediex_Pascual.Models{
             set{_respuestas = value;}
         }
 
-        static void InicializarJuego()
+        public static void InicializarJuego()
         {
             _username = "";
             _puntajeActual = 0;
             _cantidadPreguntasCorrectas = 0;
         }
-        static void ObtenerCategorias()
-        {
-            BD.ObtenerCategorias();
-        }
-        static void ObtenerDificultades()
-        {
-            BD.ObtenerDificultades();
-        }
-        static void CargarPartida(string username, int dificultad, int categoria)
+        public static void CargarPartida(string username, int dificultad, int categoria)
         {
             _preguntas = BD.ObtenerPreguntas(dificultad, categoria);
             _respuestas = BD.ObtenerRespuestas(_preguntas);
         }
-        static void ProximaPregunta()
+        public static void ObtenerCategorias()
         {
-            Random rand = new Random();
-            int i = rand.Next();
+            BD.ObtenerCategorias();
+        }
+        public static void ObtenerDificultades()
+        {
+            BD.ObtenerDificultades();
+        }
+        public static void ObtenerProximaPregunta()
+        {
+            BD.ProximaPregunta();
+        }
+        public static void ObtenerProximasRespuestas(int IdPregunta)
+        {
+            BD.ObtenerProximasRespuestas(IdPregunta);
+        }
+        public static bool VerificarRespuestas(int IdPregunta, int IdRespuesta)
+        {
+            bool correcta = false;
+
+            
+            using(SqlConnection db = new SqlConnection(_conectionString))
+            {
+                string SQL = "SELECT Correcta FROM Preguntas WHERE IdRespuesta = @pIdRespuesta";
+                correcta = db.Execute(SQL, new{pIdRespuesta = IdRespuesta});
+                if(correcta = true)
+                {
+                    _cantidadPreguntasCorrectas + 1;
+                    _puntajeActual = _puntajeActual + 1;//Hacer switch dificultad
+                    string SQL = "DELETE FROM Preguntas WHERE IdPregunta = @pIdPregunta";
+                    using(SqlConnection db = new SqlConnection(_conectionString))
+                    {
+                        db.Execute(SQL, new{pIdPregunta = IdPregunta});
+                    }
+                }
+            }
+            return devolver;
 
         }
-        
 
     }
 }

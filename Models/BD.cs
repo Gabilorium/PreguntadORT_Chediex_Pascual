@@ -87,14 +87,29 @@ namespace PreguntadORT_Chediex_Pascual.Models{
         }
         public static List<Respuestas> ObtenerRespuestas(List<Preguntas> IdPregunta)
         {
-                using(SqlConnection db = new SqlConnection(_conectionString))
-                {
-                    string SQL = "SELECT * FROM Respuestas WHERE IdPregunta = @pIdPregunta";
-                    _ListaRespuestas = db.Query<Respuestas>(SQL, new{pIdPregunta = IdPregunta}).ToList();
-                }
-                return _ListaRespuestas;
+            using(SqlConnection db = new SqlConnection(_conectionString))
+            {
+                string SQL = "SELECT * FROM Respuestas WHERE IdPregunta = @pIdPregunta";
+                _ListaRespuestas = db.Query<Respuestas>(SQL, new{pIdPregunta = IdPregunta}).ToList();
+            }
+            return _ListaRespuestas;
         }
-
-
+        public static void ProximaPregunta()
+        {
+            string SQL = "SELECT TOP(1) * FROM Preguntas ORDER BY NEWID()";
+            using(SqlConnection db = new SqlConnection(_conectionString))
+            {
+                db.Execute(SQL);
+            }
+        }
+        public static List<Respuestas> ObtenerProximasRespuestas(int IdPregunta)
+        {
+            using(SqlConnection db = new SqlConnection(_conectionString))
+            {
+                string SQL = "SELECT * FROM Respuestas WHERE IdPregunta = @pIdPregunta";
+                _ListaRespuestas = db.Query<Respuestas>(SQL, new{pIdPregunta = IdPregunta}).ToList();
+            }
+            return _ListaRespuestas;
+        }
     }
 }
