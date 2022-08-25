@@ -71,7 +71,7 @@ namespace PreguntadORT_Chediex_Pascual.Models{
         }
         public static void CargarPartida(string Username, int IdDificultad, int IdCategoria)
         {
-            _preguntas = BD.ObtenerPreguntas(Dificultad, Categoria);
+            _preguntas = BD.ObtenerPreguntas(IdDificultad, IdCategoria);
             _respuestas = BD.ObtenerRespuestas(_preguntas);
         }
         public static void ObtenerCategorias()
@@ -99,9 +99,9 @@ namespace PreguntadORT_Chediex_Pascual.Models{
             {
                 string SQL = "SELECT Correcta FROM Preguntas WHERE IdRespuesta = @pIdRespuesta";
                 correcta = db.Execute(SQL, new{pIdRespuesta = IdRespuesta});
-                if(correcta = true)
+                if(correcta == true)
                 {
-                    _cantidadPreguntasCorrectas + 1;
+                    CantidadPreguntasCorrectas + 1;
                     _puntajeActual = _puntajeActual + 1;
                     /*--------HACER SWITCH DIFICULTAD------*/
                     string SQL = "DELETE FROM Preguntas WHERE IdPregunta = @pIdPregunta";
@@ -111,7 +111,7 @@ namespace PreguntadORT_Chediex_Pascual.Models{
                     }
                 }
             }
-            return devolver;
+            return correcta;
 
         }
 
