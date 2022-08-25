@@ -21,8 +21,8 @@ public class HomeController : Controller
     public IActionResult ConfigurarJuego()
     {
         Juego.InicializarJuego();
-        ViewBag.Categoria = Juego.ObtenerCategorias();
-        ViewBag.Dificultad = Juego.ObtenerDificultades();
+        ViewBag.ListaCategoria = Juego.ObtenerCategorias();
+        ViewBag.ListaDificultad = Juego.ObtenerDificultades();
         return View();
     }
     public IActionResult Comenzar(string Username, int IdDificultad, int IdCategoria)
@@ -50,15 +50,15 @@ public class HomeController : Controller
     public IActionResult VerificarRespuesta(int IdPregunta, int IdRespuesta)
     {
         //Juego.VerificarRespuestas(IdPregunta, IdRespuesta);
-        if(Juego.VerificarRespuesta(IdPregunta, IdRespuesta)== true)
+        if(Juego.VerificarRespuestas(IdPregunta, IdRespuesta) = true)
         {
             ViewBag.Resultado = "Es correcta";
         }
         else
         {
-            ViewBag.Resultado = "La respuesta es incorrecta, la respuesta correcta es: " + BD.ObtenerRespuestas(IdPregunta);
+            ViewBag.Resultado = "La respuesta es incorrecta, la respuesta correcta es: " + BD.ObtenerProximasRespuestas(IdPregunta);
         }
-        return view("Respuesta");
+        return View("Respuesta");
     }
     public IActionResult Privacy()
     {

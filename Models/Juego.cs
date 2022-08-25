@@ -16,7 +16,10 @@ namespace PreguntadORT_Chediex_Pascual.Models{
         static private int _puntajeActual;
         static private int _cantidadPreguntasCorrectas;
         private static List<Preguntas> _preguntas = new List<Preguntas>();
+        private static List<Categorias> _categorias = new List<Categorias>();
         private static List<Respuestas> _respuestas = new List<Respuestas>();
+        private static string _conectionString = 
+        @"Server=A-PHZ2-AMI-013; DataBase=Qatar2022;Trusted_Connection=True;";
         public Juego(string username, int puntajeActual, int cantidadPreguntasCorrectas, List<Preguntas> preguntas, List<Respuestas> respuestas)
         {
             _username = username;
@@ -76,7 +79,7 @@ namespace PreguntadORT_Chediex_Pascual.Models{
         }
         public static void ObtenerCategorias()
         {
-            BD.ObtenerCategorias();
+            _categorias = BD.ObtenerCategorias();
         }
         public static void ObtenerDificultades()
         {
@@ -90,23 +93,22 @@ namespace PreguntadORT_Chediex_Pascual.Models{
         {
             BD.ObtenerProximasRespuestas(IdPregunta);
         }
-        public static bool VerificarRespuestas(int IdPregunta, int IdRespuesta)
+        public static int VerificarRespuestas(int IdPregunta, int IdRespuesta)
         {
-            bool correcta = false;
+            int correcta = 0;
 
             
             using(SqlConnection db = new SqlConnection(_conectionString))
             {
                 string SQL = "SELECT Correcta FROM Preguntas WHERE IdRespuesta = @pIdRespuesta";
                 correcta = db.Execute(SQL, new{pIdRespuesta = IdRespuesta});
-                if(correcta == true)
+                if(correcta == 1)
                 {
                     _cantidadPreguntasCorrectas= _cantidadPreguntasCorrectas + 1;
                     _puntajeActual = _puntajeActual + 1;
                     /*--------HACER SWITCH DIFICULTAD------*/
                     string SQL2 = "DELETE FROM Preguntas WHERE IdPregunta = @pIdPregunta";
                     db.Execute(SQL2, new{pIdPregunta = IdPregunta});
-                    
                 }
             }
             return correcta;

@@ -10,7 +10,7 @@ namespace PreguntadORT_Chediex_Pascual.Models{
     public class Categorias
 
     {
-        private int _idDificultad;
+        private int _idCategoria;
         private string _nombre;
         private string _foto;
 
@@ -22,15 +22,15 @@ namespace PreguntadORT_Chediex_Pascual.Models{
 
         public Categorias()
         {
-            _idDificultad = 0;
+            _idCategoria = 0;
             _nombre = "";
             _foto="";
         }
 
-        public int IdDificultad
+        public int IdCategoria
         {
-            get{ return _idDificultad;}
-            set{_idDificultad = value;}
+            get{ return _idCategoria;}
+            set{_idCategoria = value;}
         }
         public string Nombre
         {
