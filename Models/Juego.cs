@@ -9,7 +9,7 @@ using Dapper;
 
 namespace PreguntadORT_Chediex_Pascual.Models{
 
-    public class Juego
+    public static class Juego
 
     {
         static private string _username;
@@ -17,55 +17,41 @@ namespace PreguntadORT_Chediex_Pascual.Models{
         static private int _cantidadPreguntasCorrectas;
         private static List<Preguntas> _preguntas = new List<Preguntas>();
         private static List<Categorias> _categorias = new List<Categorias>();
+        private static List<Dificultades> _dificultades = new List<Dificultades>();
         private static List<Respuestas> _respuestas = new List<Respuestas>();
+
         private static string _conectionString = 
-        @"Server=A-PHZ2-AMI-013; DataBase=Qatar2022;Trusted_Connection=True;";
-        public Juego(string username, int puntajeActual, int cantidadPreguntasCorrectas, List<Preguntas> preguntas, List<Respuestas> respuestas)
-        {
-            _username = username;
-            _puntajeActual = puntajeActual;
-            _cantidadPreguntasCorrectas = cantidadPreguntasCorrectas;
-            _preguntas = preguntas;
-            _respuestas = respuestas;
-        }
+        @"Server=A-PHZ2-AMI-014; DataBase=Qatar2022;Trusted_Connection=True;";
 
-        public Juego()
-        {
-            _username = "";
-            _puntajeActual = 0;
-            _cantidadPreguntasCorrectas = 0;
-        }
-
-        public string Username
+        public static string Username
         {
             get{ return _username;}
             set{_username = value;}
         }
 
-        public int PuntajeActual
+        public static int PuntajeActual
         {
             get{ return _puntajeActual;}
             set{_puntajeActual = value;}
         }
         
-        public int CantidadPreguntasCorrectas
+        public static int CantidadPreguntasCorrectas
         {
             get{ return _cantidadPreguntasCorrectas;}
             set{_cantidadPreguntasCorrectas = value;}
         }
 
-        public List<Preguntas> ListaPreguntas
+        public static List<Preguntas> ListaPreguntas
         {
             get{ return _preguntas;}
             set{_preguntas = value;}
         }
 
-        public List<Respuestas> ListaRespuestas
+        public static List<Respuestas> ListaRespuestas
         {
             get{ return _respuestas;}
             set{_respuestas = value;}
         }
-
         public static void InicializarJuego()
         {
             _username = "";
@@ -74,24 +60,28 @@ namespace PreguntadORT_Chediex_Pascual.Models{
         }
         public static void CargarPartida(string Username, int IdDificultad, int IdCategoria)
         {
+            _username = Username;
             _preguntas = BD.ObtenerPreguntas(IdDificultad, IdCategoria);
             _respuestas = BD.ObtenerRespuestas(_preguntas);
         }
-        public static void ObtenerCategorias()
+        public static List<Categorias> ObtenerCategorias()
         {
             _categorias = BD.ObtenerCategorias();
+            return _categorias;
         }
-        public static void ObtenerDificultades()
+        public static List<Dificultades> ObtenerDificultades()
         {
-            BD.ObtenerDificultades();
+            _dificultades = BD.ObtenerDificultades();
+            return _dificultades;
         }
-        public static void ObtenerProximaPregunta()
+        public static Preguntas ObtenerProximaPregunta()
         {
-            BD.ProximaPregunta();
+            return BD.ProximaPregunta();
+            
         }
-        public static void ObtenerProximasRespuestas(int IdPregunta)
+        public static List<Respuestas> ObtenerProximasRespuestas(int IdPregunta)
         {
-            BD.ObtenerProximasRespuestas(IdPregunta);
+            return BD.ObtenerProximasRespuestas(IdPregunta);
         }
         public static int VerificarRespuestas(int IdPregunta, int IdRespuesta)
         {

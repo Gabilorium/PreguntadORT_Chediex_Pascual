@@ -15,7 +15,7 @@ namespace PreguntadORT_Chediex_Pascual.Models{
         private static List<Categorias> _ListaCategorias = new List<Categorias>();
         private static List<Dificultades> _ListaDificultades = new List<Dificultades>();
         private static string _conectionString = 
-        @"Server=A-PHZ2-AMI-013; DataBase=Qatar2022;Trusted_Connection=True;";
+        @"Server=A-PHZ2-AMI-014; DataBase=Qatar2022;Trusted_Connection=True;";
         public static List<Categorias>  ObtenerCategorias()
         {
             using(SqlConnection db = new SqlConnection(_conectionString))
@@ -94,13 +94,15 @@ namespace PreguntadORT_Chediex_Pascual.Models{
             }
             return _ListaRespuestas;
         }
-        public static void ProximaPregunta()
+        public static Preguntas ProximaPregunta()
         {
+            Preguntas pregunta;
             string SQL = "SELECT TOP(1) * FROM Preguntas ORDER BY NEWID()";
             using(SqlConnection db = new SqlConnection(_conectionString))
             {
-                db.Execute(SQL);
+                pregunta = db.Execute(SQL);
             }
+            return pregunta;
         }
         public static List<Respuestas> ObtenerProximasRespuestas(int IdPregunta)
         {
