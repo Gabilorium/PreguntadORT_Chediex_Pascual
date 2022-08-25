@@ -69,7 +69,7 @@ namespace PreguntadORT_Chediex_Pascual.Models{
             _puntajeActual = 0;
             _cantidadPreguntasCorrectas = 0;
         }
-        public static void CargarPartida(string Username, int Dificultad, int Categoria)
+        public static void CargarPartida(string Username, int IdDificultad, int IdCategoria)
         {
             _preguntas = BD.ObtenerPreguntas(Dificultad, Categoria);
             _respuestas = BD.ObtenerRespuestas(_preguntas);

@@ -28,7 +28,7 @@ public class HomeController : Controller
     public IActionResult Comenzar(string Username, int IdDificultad, int IdCategoria)
     {
         Juego.InicializarJuego();
-        Juego.CargarPartida();
+        Juego.CargarPartida(Username, IdCategoria, IdCategoria);
         return RedirectToAction("Jugar", "Home", new{IdDificultad = IdDificultad, IdCategoria = IdCategoria});
     }
     public IActionResult Jugar()
