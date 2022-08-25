@@ -101,7 +101,7 @@ namespace PreguntadORT_Chediex_Pascual.Models{
                 correcta = db.Execute(SQL, new{pIdRespuesta = IdRespuesta});
                 if(correcta == true)
                 {
-                    CantidadPreguntasCorrectas + 1;
+                    _cantidadPreguntasCorrectas= _cantidadPreguntasCorrectas + 1;
                     _puntajeActual = _puntajeActual + 1;
                     /*--------HACER SWITCH DIFICULTAD------*/
                     string SQL = "DELETE FROM Preguntas WHERE IdPregunta = @pIdPregunta";
