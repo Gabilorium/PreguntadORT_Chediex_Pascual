@@ -20,3 +20,14 @@ body {
   height: 50%;
   width:auto;
 }
+.chiquitito{
+  max-width: 50%;
+  max-height: auto;
+} 
+.chiquito{
+  width: 10%;
+}
+img.navbar-Img {
+  width: 100%;
+  height: 100%;
+}
