@@ -1,0 +1,33 @@
+@{
+    ViewData["Title"] = "Configurar Juego";
+}
+    <p>Nombre: @ViewBag.Username</p>
+    <p>Puntaje actual: @ViewBag.PuntajeActual</p>
+
+    <form action='@Url.Action("VerificarRespuesta", "Home")' method="get" enctype="multipart/form-data">
+        <div class="form-group">
+            <p>
+                Selecciona la dificultad: <br/>
+                <input type="radio" name="IdDificultad" value="1"/> <label
+                >Facil</label><br/>
+                <input type="radio" name="IdDificultad" value="2"/> <label
+                >Medio</label><br/>
+                <input type="radio" name="IdDificultad" value="3"/> <label
+                >Dificil</label><br/>
+                <input type="radio" name="IdDificultad" value="-1"/> <label
+                >Todos</label><br/>
+            </p>
+            <p>
+                Selecciona la categoria: <br/>
+                <input type="radio" name="IdCategoria" value="1"/> <label
+                >Personajes</label><br/>
+                <input type="radio" name="IdCategoria" value="2"/> <label
+                >Lugares</label><br/>
+                <input type="radio" name="IdCategoria" value="3"/> <label
+                >Referencias</label><br/>
+                <input type="radio" name="IdCategoria" value="-1"/> <label
+                >Todos</label><br/>
+            </p>
+        </div>
+        <button type="submit" class="btn btn-primary">Crear</button>
+    </form>

@@ -27,15 +27,18 @@ public class HomeController : Controller
     }
     public IActionResult Comenzar(string Username, int IdDificultad, int IdCategoria)
     {
-        Juego.InicializarJuego();
         Juego.CargarPartida(Username, IdCategoria, IdCategoria);
-        return RedirectToAction("Jugar", "Home", new{IdDificultad = IdDificultad, IdCategoria = IdCategoria});
+        return RedirectToAction("Jugar", "Home", new{Username = Username, IdDificultad = IdDificultad, IdCategoria = IdCategoria});
     }
     public IActionResult Jugar()
     {
         Preguntas pregunta = Juego.ObtenerProximaPregunta();
+        //ViewBag.preg = Juego.ObtenerProximaPregunta();
         if(pregunta != null)
         {
+            ViewBag.Username = Juego.Username;
+            ViewBag.PuntajeActual = Juego.PuntajeActual;
+            ViewBag.Enunciado = pregunta.Enunciado;
             ViewBag.IdRespuesta = Juego.ObtenerProximasRespuestas(pregunta.IdPregunta);
             return View("Juego");
         }

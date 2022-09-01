@@ -15,7 +15,7 @@ namespace PreguntadORT_Chediex_Pascual.Models{
         private static List<Categorias> _ListaCategorias = new List<Categorias>();
         private static List<Dificultades> _ListaDificultades = new List<Dificultades>();
         private static string _conectionString = 
-        @"Server=A-PHZ2-AMI-014; DataBase=Qatar2022;Trusted_Connection=True;";
+        @"Server=A-PHZ2-AMI-014; DataBase=PreguntadOrt;Trusted_Connection=True;";
         public static List<Categorias>  ObtenerCategorias()
         {
             using(SqlConnection db = new SqlConnection(_conectionString))
@@ -64,15 +64,20 @@ namespace PreguntadORT_Chediex_Pascual.Models{
             }
             return pregunta;
         }
-        public static List<Respuestas> ObtenerRespuestas(List<Preguntas> IdPregunta)
+        public static List<Respuestas> ObtenerRespuestas(List<Preguntas> preguntas)
         {
-            
-            using(SqlConnection db = new SqlConnection(_conectionString))
+            List<Respuestas> listarespuestas = new List<Respuestas>();
+            foreach (Preguntas preg in preguntas)
             {
                 string SQL = "SELECT * FROM Respuestas WHERE IdPregunta = @pIdPregunta";
-                _ListaRespuestas = db.Query<Respuestas>(SQL, new{pIdPregunta = IdPregunta}).ToList();
+                using(SqlConnection db = new SqlConnection(_conectionString))
+                {
+
+                    listarespuestas.AddRange(db.Query<Respuestas>(SQL, new{pIdPregunta = preg.IdPregunta}));
+                }
             }
-            return _ListaRespuestas;
+            return listarespuestas;
+            
         }
         public static List<Respuestas> ObtenerProximasRespuestas(int IdPregunta)
         {

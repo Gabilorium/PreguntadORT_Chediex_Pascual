@@ -76,7 +76,7 @@ namespace PreguntadORT_Chediex_Pascual.Models{
         }
         public static Preguntas ObtenerProximaPregunta()
         {
-            int proxpreg = -1;
+            int proxpreg = 0;
             
             if(proxpreg < _preguntas.Count())
             {
@@ -87,12 +87,19 @@ namespace PreguntadORT_Chediex_Pascual.Models{
         }
         public static List<Respuestas> ObtenerProximasRespuestas(int IdPregunta)
         {
-            return BD.ObtenerProximasRespuestas(IdPregunta);
+            if(_preguntas.Count() > 0)
+            {
+                return BD.ObtenerProximasRespuestas(IdPregunta);
+            }
+            else
+            {
+                return null;
+            }
+
         }
         public static int VerificarRespuestas(int IdPregunta, int IdRespuesta)
         {
             int correcta = 0;
-
             
             using(SqlConnection db = new SqlConnection(_conectionString))
             {
