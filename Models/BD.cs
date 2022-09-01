@@ -36,54 +36,22 @@ namespace PreguntadORT_Chediex_Pascual.Models{
         }
         public static List<Preguntas> ObtenerPreguntas(int IdDificultad, int IdCategoria)
         {
-            /*if(IdDificultad != -1 && IdCategoria != -1)
+            using(SqlConnection db = new SqlConnection(_conectionString))
             {
-                using(SqlConnection db = new SqlConnection(_conectionString))
+                string SQL = "SELECT * FROM Preguntas";
+                string connector = " WHERE ";
+                if(IdCategoria != -1)
                 {
-                    string SQL = "SELECT * FROM Preguntas WHERE IdCategoria = @pIdCategoria AND IdDificultad = @pIdDificultad";
-                    _ListaPreguntas = db.Query<Preguntas>(SQL, new{pIdCategoria = IdCategoria, pIdDificultad = IdDificultad}).ToList();
+                    SQL = SQL + connector + "IdCategoria = @pIdCategoria";
+                    connector = " AND ";
                 }
+                if(IdDificultad != -1)
+                {
+                    SQL = SQL + connector + "IdDificultad = @pIdDificultad";
+                }
+                SQL = SQL + " order by NEWID()";
+                _ListaPreguntas = db.Query<Preguntas>(SQL, new{pIdCategoria = IdCategoria, pIdDificultad = IdDificultad}).ToList();
             }
-            else if(IdDificultad != -1 && IdCategoria == -1)
-            {
-                using(SqlConnection db = new SqlConnection(_conectionString))
-                {
-                    string SQL = "SELECT * FROM Preguntas WHERE IdCategoria = @pIdCategoria";
-                    _ListaPreguntas = db.Query<Preguntas>(SQL, new{pIdCategoria = IdCategoria}).ToList();
-                }
-            }
-            else if(IdDificultad == -1 && IdCategoria != -1)
-            {
-                using(SqlConnection db = new SqlConnection(_conectionString))
-                {
-                    string SQL = "SELECT * FROM Preguntas WHERE IdDificultad = @pIdDificultad";
-                    _ListaPreguntas = db.Query<Preguntas>(SQL, new{pIdDificultad = IdDificultad}).ToList();
-                }
-            }
-            else if(IdDificultad == -1 && IdCategoria == -1)
-            {
-                using(SqlConnection db = new SqlConnection(_conectionString))
-                {
-                    string SQL = "SELECT * FROM Preguntas";
-                    _ListaPreguntas = db.Query<Preguntas>(SQL).ToList();
-                }
-            }*/
-             using(SqlConnection db = new SqlConnection(_conectionString))
-                {
-                    string SQL = "SELECT * FROM Preguntas";
-                    string connector = " WHERE ";
-                    if(IdCategoria != -1)
-                    {
-                        SQL = SQL + connector + "IdCategoria = @pIdCategoria";
-                        connector = " AND ";
-                    }
-                    if(IdDificultad != -1)
-                    {
-                        SQL = SQL + connector + "IdDificultad = @pIdDificultad";
-                    }
-                    SQL = SQL + " order by NEWID()";
-                    _ListaPreguntas = db.Query<Preguntas>(SQL, new{pIdCategoria = IdCategoria, pIdDificultad = IdDificultad}).ToList();
-                }
             return _ListaPreguntas;
         }
         public static Preguntas ObtenerPregunta(int IdPregunta)
