@@ -76,14 +76,12 @@ namespace PreguntadORT_Chediex_Pascual.Models{
         }
         public static Preguntas ObtenerProximaPregunta()
         {
-            int proxpreg = 0;
-            
-            if(proxpreg < _preguntas.Count())
+            Preguntas preg = new Preguntas();
+            for (int i = 0; i < _preguntas.Count(); i++)
             {
-                proxpreg = proxpreg +1;
+                preg = _preguntas[i];
             }
-            return BD.ObtenerPregunta(proxpreg);       
-            
+            return preg;
         }
         public static List<Respuestas> ObtenerProximasRespuestas(int IdPregunta)
         {
@@ -97,25 +95,37 @@ namespace PreguntadORT_Chediex_Pascual.Models{
             }
 
         }
-        public static int VerificarRespuestas(int IdPregunta, int IdRespuesta)
+        public static int VerificarRespuestas(int IdPregunta, int IdRespuesta, int IdDificultad)
         {
-            int correcta = 0;
-            
-            using(SqlConnection db = new SqlConnection(_conectionString))
+            for(int i = 0; i<_preguntas.Count(); i++)
             {
-                string SQL = "SELECT Correcta FROM Preguntas WHERE IdRespuesta = @pIdRespuesta";
-                correcta = db.Execute(SQL, new{pIdRespuesta = IdRespuesta});
-                if(correcta == 1)
+                if(_preguntas[i].IdPregunta == IdPregunta)
                 {
-                    _cantidadPreguntasCorrectas= _cantidadPreguntasCorrectas + 1;
-                    _puntajeActual = _puntajeActual + 1;
-                    /*--------HACER SWITCH DIFICULTAD------*/
-                    string SQL2 = "DELETE FROM Preguntas WHERE IdPregunta = @pIdPregunta";
-                    db.Execute(SQL2, new{pIdPregunta = IdPregunta});
+                    _preguntas.RemoveAt(i);
                 }
             }
-            return correcta;
-
+            foreach (Respuestas item in _respuestas)
+            {
+                if(item.IdRespuesta == IdRespuesta)
+                {
+                    if(item.Correcta == true)
+                    {
+                        switch(IdDificultad)
+                        {
+                            case 1:
+                            _puntajeActual += 100;
+                            break;
+                            case 2:
+                            _puntajeActual += 200;
+                            break;
+                            case 3:
+                            _puntajeActual += 300;
+                            break;
+                        }
+                        
+                    }
+                }
+            }
         }
 
     }

@@ -89,15 +89,5 @@ namespace PreguntadORT_Chediex_Pascual.Models{
             }
             return _ListaRespuestas;
         }
-        public static int VerificarRespuesta(int IdPregunta)
-        {
-            int correcta = 0;
-            using(SqlConnection db = new SqlConnection(_conectionString))
-            {
-                string SQL = "SELECT * FROM Respuestas WHERE IdPregunta = @pIdPregunta";
-                correcta = db.QueryFirstOrDefault(SQL, new{pIdPregunta = IdPregunta});
-            }
-            return correcta;
-        }
     }
 }

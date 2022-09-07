@@ -9,14 +9,14 @@
             Categorias:
             @foreach(Categorias p in ViewBag.ListaCategoria)
             {
-                <p><input type="radio" name="IdCategoria" value="@p.IdCategoria" required/> <label>@p.Nombre</label></p>
+                <p><input type="radio" name="IdCategoria" value="@p.IdCategoria" required/><label>@p.Nombre</label></p>
             }
             <p><input type="radio" name="IdCategoria" value="-1"/> <label>Todos</label><br/></p>
 
             Dificultades:
             @foreach(Dificultades p in ViewBag.ListaDificultad)
             {
-                <p><input type="radio" name="IdDificultad" value="@p.IdDificultad" required/> <label>@p.Nombre</label></p>
+                <p><input type="radio" name="IdDificultad" value="@p.IdDificultad" required/><label>@p.Nombre</label></p>
             }
             <p><input type="radio" name="IdDificultad" value="-1"/> <label>Todos</label><br/></p>
         </div>
