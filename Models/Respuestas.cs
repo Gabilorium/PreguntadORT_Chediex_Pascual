@@ -34,11 +34,15 @@ namespace PreguntadORT_Chediex_Pascual.Models{
             _correcta = false;
             _foto = "";
         }
-
-        public int IdPregunta
+        public int IdRespuesta
         {
             get{ return _idRespuesta;}
             set{_idRespuesta = value;}
+        }
+        public int IdPregunta
+        {
+            get{ return _idPregunta;}
+            set{_idPregunta = value;}
         }
 
         public int Opcion
