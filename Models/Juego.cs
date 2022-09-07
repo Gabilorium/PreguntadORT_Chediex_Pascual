@@ -95,7 +95,7 @@ namespace PreguntadORT_Chediex_Pascual.Models{
             }
 
         }
-        public static int VerificarRespuestas(int IdPregunta, int IdRespuesta, int IdDificultad)
+        public static bool VerificarRespuestas(int IdPregunta, int IdRespuesta, int IdDificultad)
         {
             for(int i = 0; i<_preguntas.Count(); i++)
             {
@@ -106,12 +106,9 @@ namespace PreguntadORT_Chediex_Pascual.Models{
             }
             foreach (Respuestas item in _respuestas)
             {
-                if(item.IdRespuesta == IdRespuesta)
-                {
-                    if(item.Correcta == true)
-                    {
-                        switch(IdDificultad)
-                        {
+                if(item.IdRespuesta == IdRespuesta){
+                    if(item.Correcta == true){
+                        switch(IdDificultad){
                             case 1:
                             _puntajeActual += 100;
                             break;
@@ -122,10 +119,12 @@ namespace PreguntadORT_Chediex_Pascual.Models{
                             _puntajeActual += 300;
                             break;
                         }
-                        
+                        _cantidadPreguntasCorrectas++;
+                        return true;
                     }
                 }
             }
+            return false;
         }
 
     }

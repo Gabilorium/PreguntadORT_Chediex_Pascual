@@ -48,10 +48,10 @@ public class HomeController : Controller
         }
     }
     
-    public IActionResult VerificarRespuesta(int IdPregunta, int IdRespuesta)
+    public IActionResult VerificarRespuesta(int IdPregunta, int IdRespuesta,int IdDificultad)
     {
-        int Resul = Juego.VerificarRespuestas(IdPregunta, IdRespuesta);
-        if(Resul == 1)
+        bool Resul = Juego.VerificarRespuestas(IdPregunta, IdRespuesta, IdDificultad);
+        if(Resul == true)
         {
             ViewBag.Resultado = "La respuesta es correcta";
         }

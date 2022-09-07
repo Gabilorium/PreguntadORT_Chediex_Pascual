@@ -10,7 +10,7 @@
         @foreach(Respuestas p in ViewBag.Respuestas)
         {
             <p>
-            <a href='@Url.Action("VerificarRespuesta", "Home", new {IdPregunta = @p.IdPregunta ,IdRespuesta = @p.IdRespuesta})'>@p.Contenido</a>
+            <a href='@Url.Action("VerificarRespuesta", "Home", new {IdPregunta = @p.IdPregunta ,IdRespuesta = @p.IdRespuesta, IdDificultad = @p.IdDificultad})'>@p.Contenido</a>
             </p>
         }
 </div>
