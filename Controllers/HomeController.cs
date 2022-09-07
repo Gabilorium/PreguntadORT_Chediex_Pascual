@@ -51,7 +51,14 @@ public class HomeController : Controller
     
     public IActionResult VerificarRespuesta(int IdPregunta, int IdRespuesta,int IdDificultad)
     {
-        Respuestas resp = 
+        string opcCorrecta = "";
+        foreach(Respuestas resp in BD.ObtenerProximasRespuestas(IdPregunta))
+        {
+            if (resp.Correcta == true)
+            {
+                opcCorrecta = resp.Contenido;
+            }
+        }
         bool Resul = Juego.VerificarRespuestas(IdPregunta, IdRespuesta, IdDificultad);
         if(Resul == true)
         {
@@ -59,7 +66,7 @@ public class HomeController : Controller
         }
         else
         {
-            ViewBag.Resultado = "La respuesta es incorrecta, la respuesta correcta es: " + BD.ObtenerProximasRespuestas(IdPregunta);
+            ViewBag.Resultado = "La respuesta es incorrecta, la respuesta correcta es: " + opcCorrecta;
         }
         return View("Respuesta");
     }
