@@ -1,10 +1,14 @@
 @font-face{
-  font-family:Heart Breaking Bad;
+  font-family:fuente;
   src: url('/Heart Breaking Bad.otf') format('truetype');
 }
 
 html {
   font-size: 14px;
+}
+
+.tutulo{
+  font-family: fuente;
 }
 
 @media (min-width: 768px) {
