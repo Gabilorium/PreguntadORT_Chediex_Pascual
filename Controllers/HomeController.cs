@@ -51,6 +51,7 @@ public class HomeController : Controller
     
     public IActionResult VerificarRespuesta(int IdPregunta, int IdRespuesta,int IdDificultad)
     {
+        Respuestas resp = 
         bool Resul = Juego.VerificarRespuestas(IdPregunta, IdRespuesta, IdDificultad);
         if(Resul == true)
         {
