@@ -1,3 +1,8 @@
+@font-face{
+  font-family: Fuente;
+  src: url('/Heart Breaking Bad.otf') format('truetype');
+  
+}
 html {
   font-size: 14px;
 }
