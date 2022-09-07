@@ -40,17 +40,18 @@ namespace PreguntadORT_Chediex_Pascual.Models{
             {
                 string SQL = "SELECT * FROM Preguntas";
                 string connector = " WHERE ";
-                if(IdCategoria != -1)
-                {
-                    SQL = SQL + connector + "IdCategoria = @pIdCategoria";
-                    connector = " AND ";
-                }
                 if(IdDificultad != -1)
                 {
                     SQL = SQL + connector + "IdDificultad = @pIdDificultad";
+                    connector = " AND ";
+                }
+                if(IdCategoria != -1)
+                {
+                    SQL = SQL + connector + "IdCategoria = @pIdCategoria";
+                    
                 }
                 SQL = SQL + " order by NEWID()";
-                _ListaPreguntas = db.Query<Preguntas>(SQL, new{pIdCategoria = IdCategoria, pIdDificultad = IdDificultad}).ToList();
+                _ListaPreguntas = db.Query<Preguntas>(SQL, new{pIdDificultad = IdDificultad, pIdCategoria = IdCategoria}).ToList();
             }
             return _ListaPreguntas;
         }
@@ -87,6 +88,16 @@ namespace PreguntadORT_Chediex_Pascual.Models{
                 _ListaRespuestas = db.Query<Respuestas>(SQL, new{pIdPregunta = IdPregunta}).ToList();
             }
             return _ListaRespuestas;
+        }
+        public static int VerificarRespuesta(int IdPregunta)
+        {
+            int correcta = 0;
+            using(SqlConnection db = new SqlConnection(_conectionString))
+            {
+                string SQL = "SELECT * FROM Respuestas WHERE IdPregunta = @pIdPregunta";
+                correcta = db.QueryFirstOrDefault(SQL, new{pIdPregunta = IdPregunta});
+            }
+            return correcta;
         }
     }
 }

@@ -1,8 +1,9 @@
 @{
     ViewData["Title"] = "Configurar Juego";
 }
-<p>Nombre: @ViewBag.Username</p>
-<p>Puntaje actual: @ViewBag.PuntajeActual</p>
+<div class="text-light">
+    <p>Nombre: @ViewBag.Username</p>
+    <p>Puntaje actual: @ViewBag.PuntajeActual</p>
 
 
         <h1>@ViewBag.Enunciado</h1>
@@ -10,5 +11,4 @@
         {
             <a href='@Url.Action("VerificarRespuesta", "Home", new {IdPregunta = @p.IdPregunta ,IdRespuesta = @p.IdRespuesta})'/>@p.Contenido<br/>
         }
-    </div>
-    <button type="submit" class="btn btn-primary">Crear</button>
+</div>

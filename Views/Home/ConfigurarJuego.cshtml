@@ -2,26 +2,23 @@
     ViewData["Title"] = "Configurar Juego";
 }
     <form action='@Url.Action("Comenzar", "Home")' method="get" enctype="multipart/form-data">
-        <div class="form-group">
+        <div class="form-group text-light">
             
             <p>Ingrese el nombre de usuario:</p> 
-            <input type="text" name="Username" required/>
-            <p>
-                Selecciona la dificultad: 
-                <br/>
-                <input type="radio" name="IdDificultad" value="1" required/> <label>Facil</label><br/>
-                <input type="radio" name="IdDificultad" value="2"/> <label>Medio</label><br/>
-                <input type="radio" name="IdDificultad" value="3"/> <label>Dificil</label><br/>
-                <input type="radio" name="IdDificultad" value="-1"/> <label>Todos</label>
-                <br/>
-            </p>
-            <p>
-                Selecciona la categoria: <br/>
-                <input type="radio" name="IdCategoria" value="1" required/> <label>Personajes</label><br/>
-                <input type="radio" name="IdCategoria" value="2"/> <label>Lugares</label><br/>
-                <input type="radio" name="IdCategoria" value="3"/> <label>Referencias</label><br/>
-                <input type="radio" name="IdCategoria" value="-1"/> <label>Todos</label><br/>
-            </p>
+            <input type="text" name="Username" required/><br/>
+            Categorias:
+            @foreach(Categorias p in ViewBag.ListaCategoria)
+            {
+                <p><input type="radio" name="IdCategoria" value="@p.IdCategoria" required/> <label>@p.Nombre</label></p>
+            }
+            <p><input type="radio" name="IdCategoria" value="-1"/> <label>Todos</label><br/></p>
+
+            Dificultades:
+            @foreach(Dificultades p in ViewBag.ListaDificultad)
+            {
+                <p><input type="radio" name="IdDificultad" value="@p.IdDificultad" required/> <label>@p.Nombre</label></p>
+            }
+            <p><input type="radio" name="IdDificultad" value="-1"/> <label>Todos</label><br/></p>
         </div>
         <button type="submit" class="btn btn-primary">Comenzar</button>
     </form>
