@@ -4,21 +4,21 @@
     <form action='@Url.Action("Comenzar", "Home")' method="get" enctype="multipart/form-data">
         <div class="form-group text-light">
             
-            <p>Ingrese el nombre de usuario:</p> 
+            <h2 class="fuente mb-4">Ingrese el nombre de usuario</h2> 
             <input type="text" name="Username" required/><br/>
-            Categorias:
+            <h2 class="fuente mt-4 mb-2">Categoria</h2>
             @foreach(Categorias p in ViewBag.ListaCategoria)
             {
-                <p><input type="radio" name="IdCategoria" value="@p.IdCategoria" required/><label>@p.Nombre</label></p>
+                <h3 class="fuente"><input type="radio" name="IdCategoria" value="@p.IdCategoria" required/><label>@p.Nombre</label></h3>
             }
-            <p><input type="radio" name="IdCategoria" value="-1"/> <label>Todos</label><br/></p>
+            <h3 class="fuente"><input type="radio" name="IdCategoria" value="-1"/> <label>Todos</label><br/></h3>
 
-            Dificultades:
+            <h2 class="fuente mt-4 mb-2">Dificultad</h2>
             @foreach(Dificultades p in ViewBag.ListaDificultad)
             {
-                <p><input type="radio" name="IdDificultad" value="@p.IdDificultad" required/><label>@p.Nombre</label></p>
+                <h3 class="fuente"><input type="radio" name="IdDificultad" value="@p.IdDificultad" required/><label>@p.Nombre</label></h3>
             }
-            <p><input type="radio" name="IdDificultad" value="-1"/> <label>Todos</label><br/></p>
+            <h3 class="fuente"><input type="radio" name="IdDificultad" value="-1"/> <label>Todos</label><br/></h3>
         </div>
         <button type="submit" class="btn btn-primary">Comenzar</button>
     </form>
