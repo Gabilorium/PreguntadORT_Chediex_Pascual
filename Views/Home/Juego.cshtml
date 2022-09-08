@@ -6,11 +6,11 @@
     <p>Puntaje actual: @ViewBag.PuntajeActual</p>
 
 
-        <h1>@ViewBag.Enunciado</h1>
-        @foreach(Respuestas p in ViewBag.Respuestas)
-        {
-            <p>
-            <a href='@Url.Action("VerificarRespuesta", "Home", new {IdPregunta = @p.IdPregunta ,IdRespuesta = @p.IdRespuesta, IdDificultad = @ViewBag.Dificultad})'>@p.Contenido</a>
-            </p>
-        }
+    <h1>@ViewBag.Enunciado</h1>
+    @foreach(Respuestas p in ViewBag.Respuestas)
+    {
+        <p>
+        <a href='@Url.Action("VerificarRespuesta", "Home", new {IdPregunta = @p.IdPregunta ,IdRespuesta = @p.IdRespuesta, IdDificultad = @ViewBag.Dificultad})'>@p.Contenido</a>
+        </p>
+    }
 </div>
