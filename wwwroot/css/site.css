@@ -3,6 +3,11 @@
   src: url('/Heart Breaking Bad.otf') format('truetype');
 }
 
+@font-face{
+  font-family:fuente2;
+  src: url('/Gotham-Black.otf') format('truetype');
+}
+
 html {
   font-size: 14px;
 }
