@@ -1,5 +1,5 @@
 @{
-    ViewData["Title"] = "Configurar Juego";
+    ViewData["Title"] = "Juego";
 }
 <div class="text-light">
     <p class="fuente2">Nombre: @ViewBag.Username</p>
@@ -9,7 +9,10 @@
         <div class="row fondoPreg">
             <h1 class="fuente2">@ViewBag.Enunciado</h1>
         </div>
-        <div class="row">
+        <div class="row mb-4 foto" >
+            <img src="/Imagenes/@ViewBag.Foto" height="100%" width="auto">
+        </div>
+        <div class="row tamRtas">
             @foreach(Respuestas p in ViewBag.Respuestas)
             {
                 <div class="col-5 fondoRtas">

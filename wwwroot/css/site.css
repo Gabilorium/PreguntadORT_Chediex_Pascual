@@ -69,17 +69,38 @@ img.navbar-Img {
 .fondoPreg
 {
   background-color: rgb(41,119,62);
+  height:50%;
+  width:auto;
   margin-bottom: 4%;
+  border-radius: 10%;
 }
 .fondoRtas
 {
   background-color: rgb(54,148,87);
+  height:40%;
+  width:48%;
   margin-bottom: 2%;
   margin-right: 1%;
+  margin-left: 1%;
+  border-radius: 30%;
 }
 .colorFondo
 {
   color: rgb(31,96,50);
+}
+.tamPreg
+{
+  height:50%;
+  width:auto;
+}
+.tamRtas
+{
+  height:35%;
+}
+.foto
+{
+  height:20%;
+  width:auto;
 }
 
 /*------------------------------------------------------*/

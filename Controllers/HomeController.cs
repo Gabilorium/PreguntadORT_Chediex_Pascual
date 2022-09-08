@@ -38,6 +38,7 @@ public class HomeController : Controller
         {
             ViewBag.Username = Juego.Username;
             ViewBag.PuntajeActual = Juego.PuntajeActual;
+            ViewBag.Foto = Juego.ObtenerProximaPregunta().Foto;
             ViewBag.Dificultad = Juego.ObtenerProximaPregunta().IdDificultad;
             ViewBag.Enunciado = Juego.ObtenerProximaPregunta().Enunciado;
             ViewBag.Respuestas = Juego.ObtenerProximasRespuestas(Juego.ObtenerProximaPregunta().IdPregunta);

@@ -1,2 +1,9 @@
-<p>@ViewBag.Resultado</p>
-<a href='@Url.Action("Jugar", "Home")'>Siguiente pregunta</a>
+@{
+    ViewData["Title"] = "Resultado";
+}
+
+<div class="text-light">
+    <p>@ViewBag.Resultado</p>
+
+    <a href='@Url.Action("Jugar", "Home")' role="button" class="colorFondo fuente2 mt-5 btn btn-light text-center btn-lg">Siguiente pregunta</a>
+</div>

@@ -71,12 +71,21 @@ namespace PreguntadORT_Chediex_Pascual.Models{
         }
         public static Preguntas ObtenerProximaPregunta()
         {
-            Preguntas preg = new Preguntas();
-            for (int i = 0; i < _preguntas.Count(); i++)
+            /*for (int i = 0;i < _preguntas.Count(); i++)
             {
-                preg = _preguntas[i];
+                  preg = _preguntas[i];
             }
-            return preg;
+            */
+            if(_preguntas.Count() > 0)
+            {
+                return _preguntas[0];
+            }
+            else
+            {
+                return null;
+            }
+            
+            
         }
         public static List<Respuestas> ObtenerProximasRespuestas(int IdPregunta)
         {
