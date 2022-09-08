@@ -10,19 +10,24 @@
                     
                     <h2 class="fuente mb-4">Ingrese el nombre de usuario</h2> 
                     <input type="text" name="Username" required/><br/>
-                    <h2 class="fuente mt-4 mb-2">Categoria</h2>
-                    @foreach(Categorias p in ViewBag.ListaCategoria)
-                    {
-                        <h3><input type="radio" name="IdCategoria" value="@p.IdCategoria" required/><label>@p.Nombre</label></h3>
-                    }
-                    <h3><input type="radio" name="IdCategoria" value="-1"/> <label>Todos</label><br/></h3>
-
-                    <h2 class="fuente mt-4 mb-2">Dificultad</h2>
-                    @foreach(Dificultades p in ViewBag.ListaDificultad)
-                    {
-                        <h3><input type="radio" name="IdDificultad" value="@p.IdDificultad" required/><label>@p.Nombre</label></h3>
-                    }
-                    <h3><input type="radio" name="IdDificultad" value="-1"/> <label>Todos</label><br/></h3>
+                    <div class="row">
+                        <div class="col-6">
+                        <h2 class="fuente mt-4 mb-2">Categoria</h2>
+                            @foreach(Categorias p in ViewBag.ListaCategoria)
+                            {
+                                <h4 class="fuente"><input type="radio" name="IdCategoria" value="@p.IdCategoria" required/><label>@p.Nombre</label></h4>
+                            }
+                            <h4 class="fuente"><input type="radio" name="IdCategoria" value="-1"/><label>todos</label><br/></h4>
+                            </div>
+                            <div class="col-6">
+                            <h2 class="fuente mt-4 mb-2">Dificultad</h2>
+                            @foreach(Dificultades p in ViewBag.ListaDificultad)
+                            {
+                                <h4 class="fuente"><input type="radio" name="IdDificultad" value="@p.IdDificultad" required/><label>@p.Nombre</label></h4>
+                            }
+                            <h4 class="fuente"><input type="radio" name="IdDificultad" value="-1"/><label>todos</label><br/></h4>
+                        </div>
+                    </div>
                 </div>      
                 <div class="d-grid gap-2">
                     <button type="submit" class="btn btn-light mt-5 text-center btn-lg">Comenzar</button>
