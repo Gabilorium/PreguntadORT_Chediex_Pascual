@@ -2,15 +2,22 @@
     ViewData["Title"] = "Configurar Juego";
 }
 <div class="text-light">
-    <p>Nombre: @ViewBag.Username</p>
-    <p>Puntaje actual: @ViewBag.PuntajeActual</p>
+    <p class="fuente2">Nombre: @ViewBag.Username</p>
+    <p class="fuente2">Puntaje actual: @ViewBag.PuntajeActual</p>
 
-
-    <h1>@ViewBag.Enunciado</h1>
-    @foreach(Respuestas p in ViewBag.Respuestas)
-    {
-        <p>
-        <a href='@Url.Action("VerificarRespuesta", "Home", new {IdPregunta = @p.IdPregunta ,IdRespuesta = @p.IdRespuesta, IdDificultad = @ViewBag.Dificultad})'>@p.Contenido</a>
-        </p>
-    }
+    <div class="container">
+        <div class="row fondoPreg">
+            <h1 class="fuente2">@ViewBag.Enunciado</h1>
+        </div>
+        <div class="row">
+            @foreach(Respuestas p in ViewBag.Respuestas)
+            {
+                <div class="col-5 fondoRtas">
+                    <p class="fuente2 text-center">
+                        <a href='@Url.Action("VerificarRespuesta", "Home", new {IdPregunta = @p.IdPregunta ,IdRespuesta = @p.IdRespuesta, IdDificultad = @ViewBag.Dificultad})'>@p.Contenido</a>
+                    </p>
+                </div>
+            }
+        </div>
+    </div>
 </div>
