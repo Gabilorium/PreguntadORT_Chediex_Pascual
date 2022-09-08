@@ -6,19 +6,21 @@
     <p class="fuente2">Puntaje actual: @ViewBag.PuntajeActual</p>
 
     <div class="container">
-        <div class="row fondoPreg">
+        <div class=" text-center row fondoPreg">
             <h1 class="fuente2">@ViewBag.Enunciado</h1>
         </div>
-        <div class="row mb-4 foto" >
-            <img src="/Imagenes/@ViewBag.Foto" height="100%" width="auto">
+        <div class="mb-4 foto row">
+            <img src="/Imagenes/@ViewBag.Foto" class="imagen" width="auto">
         </div>
         <div class="row tamRtas">
             @foreach(Respuestas p in ViewBag.Respuestas)
             {
                 <div class="col-5 fondoRtas">
-                    <p class="fuente2 text-center">
-                        <a href='@Url.Action("VerificarRespuesta", "Home", new {IdPregunta = @p.IdPregunta ,IdRespuesta = @p.IdRespuesta, IdDificultad = @ViewBag.Dificultad})'>@p.Contenido</a>
-                    </p>
+                    <a href='@Url.Action("VerificarRespuesta", "Home", new {IdPregunta = @p.IdPregunta ,IdRespuesta = @p.IdRespuesta, IdDificultad = @ViewBag.Dificultad})'>
+                        <p class="fuente2 text-center resp">
+                            @p.Contenido
+                        </p>
+                    </a>
                 </div>
             }
         </div>
