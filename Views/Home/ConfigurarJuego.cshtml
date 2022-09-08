@@ -9,7 +9,7 @@
             <h2 class="fuente mt-4 mb-2">Categoria</h2>
             @foreach(Categorias p in ViewBag.ListaCategoria)
             {
-                <h3 class="fuente"><input type="radio" name="IdCategoria" value="@p.IdCategoria" required/><label>@p.Nombre</label></h3>
+                <h3 class="fuente"><input type="radio" name="IdCategoria" value="@p.IdCategoria" required/> <label>@p.Nombre</label></h3>
             }
             <h3 class="fuente"><input type="radio" name="IdCategoria" value="-1"/> <label>Todos</label><br/></h3>
 
@@ -20,5 +20,7 @@
             }
             <h3 class="fuente"><input type="radio" name="IdDificultad" value="-1"/> <label>Todos</label><br/></h3>
         </div>
-        <button type="submit" class="btn btn-primary">Comenzar</button>
+        <div class="d-grid gap-2">
+            <button type="submit" class="btn btn-light mt-5 text-center btn-lg">Comenzar</button>
+        </div>
     </form>
