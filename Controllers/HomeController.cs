@@ -36,6 +36,7 @@ public class HomeController : Controller
         //ViewBag.preg = Juego.ObtenerProximaPregunta();
         ViewBag.Username = Juego.Username;
         ViewBag.PuntajeActual = Juego.PuntajeActual;
+        ViewBag.RespuestasCorrectas = Juego.CantidadPreguntasCorrectas;
         if(Juego.ObtenerProximaPregunta() != null)
         {
             ViewBag.Foto = Juego.ObtenerProximaPregunta().Foto;
