@@ -14,6 +14,7 @@ namespace PreguntadORT_Chediex_Pascual.Models{
         private static List<Respuestas> _ListaRespuestas = new List<Respuestas>();
         private static List<Categorias> _ListaCategorias = new List<Categorias>();
         private static List<Dificultades> _ListaDificultades = new List<Dificultades>();
+        private static List<ScoreBoard> _ListaScoreBoard = new List<ScoreBoard>();
         private static string _conectionString = 
         @"Server=A-PHZ2-CIDI-030; DataBase=PreguntadOrt;Trusted_Connection=True;";
         public static List<Categorias>  ObtenerCategorias()
@@ -88,6 +89,23 @@ namespace PreguntadORT_Chediex_Pascual.Models{
                 _ListaRespuestas = db.Query<Respuestas>(SQL, new{pIdPregunta = IdPregunta}).ToList();
             }
             return _ListaRespuestas;
+        }
+        public static void IsertarScoreboard(ScoreBoard score)
+        {
+            string SQL = "INSERT INTO ScoreBoard(Username,Puntaje,Dia) VALUES (@pUsername, @pPuntaje, @pDia)";
+            using(SqlConnection db = new SqlConnection(_conectionString))
+            {
+                db.Execute(SQL, new{pUsername = score.Username, pPuntaje = score.PuntajeActual, pDia = score.Fecha});
+            }
+        }
+        public static List<ScoreBoard> ObtenerScoreBoard(int IdPregunta)
+        {
+            using(SqlConnection db = new SqlConnection(_conectionString))
+            {
+                string SQL = "SELECT * FROM ScoreBoard ORDER BY Puntaje desc";
+                _ListaScoreBoard = db.Query<ScoreBoard>(SQL, new{pIdPregunta = IdPregunta}).ToList();
+            }
+            return _ListaScoreBoard;
         }
     }
 }

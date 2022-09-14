@@ -13,7 +13,6 @@ namespace PreguntadORT_Chediex_Pascual.Models{
     {
         static private string _username;
         static private int _puntajeActual;
-        static private DateTime _fecha;
         static private int _cantidadPreguntasCorrectas;
         private static List<Preguntas> _preguntas = new List<Preguntas>();
         private static List<Categorias> _categorias = new List<Categorias>();
@@ -36,11 +35,7 @@ namespace PreguntadORT_Chediex_Pascual.Models{
             get{ return _cantidadPreguntasCorrectas;}
             set{_cantidadPreguntasCorrectas = value;}
         }
-        public static DateTime Fecha
-        {
-            get{ return _fecha;}
-            set{_fecha = value;}
-        }
+
         public static List<Preguntas> ListaPreguntas
         {
             get{ return _preguntas;}
