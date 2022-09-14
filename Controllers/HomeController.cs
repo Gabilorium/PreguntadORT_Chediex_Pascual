@@ -47,10 +47,16 @@ public class HomeController : Controller
         }
         else
         {
+            DateTime now = DateTime.Now;
+            ScoreBoard puntaje = new ScoreBoard(Juego.Username, Juego.PuntajeActual, now);
+            BD.IsertarScoreboard(puntaje);
             return View("Fin");
         }
     }
-    
+    public IActionResult Puntajes()
+    {
+        return View();
+    }
     public IActionResult VerificarRespuesta(int IdPregunta, int IdRespuesta,int IdDificultad)
     {
         string opcCorrecta = "";
