@@ -22,6 +22,14 @@ namespace PreguntadORT_Chediex_Pascual.Models
             _puntajeActual = puntajeActual;
             _fecha = fecha;
         }
+
+        public ScoreBoard()
+        {
+            _username = "";
+            _puntajeActual = 0;
+            DateTime fecha = DateTime.Today;
+            _fecha = fecha;
+        }
         public int IdPuntaje
         {
             get{ return _idPuntaje;}

@@ -1,0 +1,33 @@
+@{
+    ViewData["Title"] = "Tabla de Puntajes";
+}
+<div class="text-center text-light mb-5">
+    <h1 class="Fuente">Tabla de puntajes</h1>
+</div>
+ 
+<table class="text-center default">
+
+  <thead>
+
+    <tr>
+      <th>Username</th>
+      <th>Puntaje</th>
+      <th>Dia</th>
+    </tr>
+
+  </thead>
+
+  <tbody>
+@foreach(ScoreBoard item in Score)
+{
+    <tr>
+      <td>El señor de los anillos</td>
+      <td>J. R. R. Tolkien</td>
+      <td>1954-1955</td>
+    </tr>
+}
+
+
+  </tbody>
+
+</table>

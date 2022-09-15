@@ -18,6 +18,8 @@ namespace PreguntadORT_Chediex_Pascual.Models{
         private static List<Categorias> _categorias = new List<Categorias>();
         private static List<Dificultades> _dificultades = new List<Dificultades>();
         private static List<Respuestas> _respuestas = new List<Respuestas>();
+
+        private static List<ScoreBoard> _scoreBoard = new List<ScoreBoard>();
         public static string Username
         {
             get{ return _username;}
@@ -46,6 +48,12 @@ namespace PreguntadORT_Chediex_Pascual.Models{
         {
             get{ return _respuestas;}
             set{_respuestas = value;}
+        }
+
+        public static List<ScoreBoard> ScoreBoard
+        {
+            get{ return _scoreBoard;}
+            set{_scoreBoard = value;}
         }
         public static void InicializarJuego()
         {

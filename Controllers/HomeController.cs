@@ -57,6 +57,7 @@ public class HomeController : Controller
     }
     public IActionResult Puntajes()
     {
+        ViewBag.Score = Juego.ScoreBoard;
         return View();
     }
     public IActionResult VerificarRespuesta(int IdPregunta, int IdRespuesta,int IdDificultad)
