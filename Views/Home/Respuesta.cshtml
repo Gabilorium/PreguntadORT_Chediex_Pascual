@@ -1,2 +1,34 @@
-<p>@ViewBag.Resultado</p>
-<a href='@Url.Action("Jugar", "Home")'>Siguiente pregunta</a>
+@{
+    ViewData["Title"] = "Resultado";
+}
+
+@if(ViewBag.Resultado == true)
+{
+    <div class="col-12 fondoBlanco text-center">             
+        <h1 class="fuente2 colorFondo">La respuesta es correcta!!!</h1>      
+    </div>
+    
+    <br>
+    <div class="mb-4 foto row">
+        <img src="/Imagenes/RespuestaCorrecta.Gif" class="w-50">
+    </div>
+    <br>
+
+}
+else
+{
+    <div class="col-12 fondoBlanco text-center">             
+        <h1 class="fuente2 error">La respuesta es incorrecta!!! </h1>      
+    </div>
+    
+    <br>
+    <div class="mb-4 foto row">
+            <img src="/Imagenes/RespuestaMal.Gif" class="w-50">
+    </div>
+    <br>
+
+    <h3 class = "text-light">La respuesta correcta es: @ViewBag.opcCorrecta</h3>
+}
+    
+
+<a href='@Url.Action("Jugar", "Home")' role="button" class="colorFondo fuente2 mt-5 btn btn-light text-center btn-lg">Siguiente pregunta</a>

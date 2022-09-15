@@ -5,7 +5,6 @@ using Microsoft.VisualBasic.CompilerServices;
 using System.Diagnostics;
 using System.Timers;
 using System.Data.SqlClient;
-using Dapper;
 
 namespace PreguntadORT_Chediex_Pascual.Models{
 
@@ -19,10 +18,6 @@ namespace PreguntadORT_Chediex_Pascual.Models{
         private static List<Categorias> _categorias = new List<Categorias>();
         private static List<Dificultades> _dificultades = new List<Dificultades>();
         private static List<Respuestas> _respuestas = new List<Respuestas>();
-
-        private static string _conectionString = 
-        @"Server=A-PHZ2-AMI-014; DataBase=Qatar2022;Trusted_Connection=True;";
-
         public static string Username
         {
             get{ return _username;}
@@ -76,12 +71,21 @@ namespace PreguntadORT_Chediex_Pascual.Models{
         }
         public static Preguntas ObtenerProximaPregunta()
         {
-            Preguntas preg = new Preguntas();
-            for (int i = 0; i < _preguntas.Count(); i++)
+            /*for (int i = 0;i < _preguntas.Count(); i++)
             {
-                preg = _preguntas[i];
+                  preg = _preguntas[i];
             }
-            return preg;
+            */
+            if(_preguntas.Count() > 0)
+            {
+                return _preguntas[0];
+            }
+            else
+            {
+                return null;
+            }
+            
+            
         }
         public static List<Respuestas> ObtenerProximasRespuestas(int IdPregunta)
         {

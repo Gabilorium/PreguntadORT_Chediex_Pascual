@@ -34,10 +34,14 @@ public class HomeController : Controller
     {
         //Preguntas pregunta = Juego.ObtenerProximaPregunta();
         //ViewBag.preg = Juego.ObtenerProximaPregunta();
+        ViewBag.Username = Juego.Username;
+        ViewBag.PuntajeActual = Juego.PuntajeActual;
+
+        ViewBag.RespuestasCorrectas = Juego.CantidadPreguntasCorrectas;
+
         if(Juego.ObtenerProximaPregunta() != null)
         {
-            ViewBag.Username = Juego.Username;
-            ViewBag.PuntajeActual = Juego.PuntajeActual;
+            ViewBag.Foto = Juego.ObtenerProximaPregunta().Foto;
             ViewBag.Dificultad = Juego.ObtenerProximaPregunta().IdDificultad;
             ViewBag.Enunciado = Juego.ObtenerProximaPregunta().Enunciado;
             ViewBag.Respuestas = Juego.ObtenerProximasRespuestas(Juego.ObtenerProximaPregunta().IdPregunta);
@@ -45,10 +49,16 @@ public class HomeController : Controller
         }
         else
         {
+            DateTime now = DateTime.Now;
+            ScoreBoard puntaje = new ScoreBoard(Juego.Username, Juego.PuntajeActual, now);
+            BD.IsertarScoreboard(puntaje);
             return View("Fin");
         }
     }
-    
+    public IActionResult Puntajes()
+    {
+        return View();
+    }
     public IActionResult VerificarRespuesta(int IdPregunta, int IdRespuesta,int IdDificultad)
     {
         string opcCorrecta = "";
@@ -62,11 +72,12 @@ public class HomeController : Controller
         bool Resul = Juego.VerificarRespuestas(IdPregunta, IdRespuesta, IdDificultad);
         if(Resul == true)
         {
-            ViewBag.Resultado = "La respuesta es correcta";
+            ViewBag.Resultado = true;
         }
         else
         {
-            ViewBag.Resultado = "La respuesta es incorrecta, la respuesta correcta es: " + opcCorrecta;
+            ViewBag.Resultado = false;
+            ViewBag.OpcCorrecta = opcCorrecta;
         }
         return View("Respuesta");
     }
