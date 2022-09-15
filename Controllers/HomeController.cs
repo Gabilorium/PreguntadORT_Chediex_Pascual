@@ -49,16 +49,16 @@ public class HomeController : Controller
         }
         else
         {
-            DateTime now = DateTime.Now;
-            ScoreBoard puntaje = new ScoreBoard(Juego.Username, Juego.PuntajeActual, now);
+            DateTime dia = DateTime.Now;
+            ScoreBoard puntaje = new ScoreBoard(Juego.Username, Juego.PuntajeActual, dia);
             BD.IsertarScoreboard(puntaje);
             return View("Fin");
         }
     }
-    public IActionResult Puntajes()
+    public IActionResult HighScores()
     {
-        ViewBag.Score = Juego.ScoreBoard;
-        return View();
+        ViewBag.Score = BD.ObtenerScoreBoard();
+        return View("HighScores");
     }
     public IActionResult VerificarRespuesta(int IdPregunta, int IdRespuesta,int IdDificultad)
     {

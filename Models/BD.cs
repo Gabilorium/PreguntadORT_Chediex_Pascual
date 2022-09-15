@@ -95,15 +95,15 @@ namespace PreguntadORT_Chediex_Pascual.Models{
             string SQL = "INSERT INTO ScoreBoard(Username,Puntaje,Dia) VALUES (@pUsername, @pPuntaje, @pDia)";
             using(SqlConnection db = new SqlConnection(_conectionString))
             {
-                db.Execute(SQL, new{pUsername = score.Username, pPuntaje = score.PuntajeActual, pDia = score.Fecha});
+                db.Execute(SQL, new{pUsername = score.Username, pPuntaje = score.Puntaje, pDia = score.Dia});
             }
         }
-        public static List<ScoreBoard> ObtenerScoreBoard(int IdPregunta)
+        public static List<ScoreBoard> ObtenerScoreBoard()
         {
             using(SqlConnection db = new SqlConnection(_conectionString))
             {
                 string SQL = "SELECT * FROM ScoreBoard ORDER BY Puntaje desc";
-                _ListaScoreBoard = db.Query<ScoreBoard>(SQL, new{pIdPregunta = IdPregunta}).ToList();
+                _ListaScoreBoard = db.Query<ScoreBoard>(SQL).ToList();
             }
             return _ListaScoreBoard;
         }

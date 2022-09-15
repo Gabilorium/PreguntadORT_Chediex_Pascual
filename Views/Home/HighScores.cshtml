@@ -1,33 +1,31 @@
 @{
     ViewData["Title"] = "Tabla de Puntajes";
 }
-<div class="text-center text-light mb-5">
-    <h1 class="Fuente">Tabla de puntajes</h1>
-</div>
+<div class="text-center text-light">
+    <h1 class="fuente mb-5">Tabla de puntajes</h1>
  
-<table class="text-center default">
+    <table class="table">
 
-  <thead>
+        <thead class="text-light">
 
-    <tr>
-      <th>Username</th>
-      <th>Puntaje</th>
-      <th>Dia</th>
-    </tr>
+            <tr>
+            <th>Username</th>
+            <th>Puntaje</th>
+            <th>Dia</th>
+            </tr>
 
-  </thead>
+        </thead>
 
-  <tbody>
-@foreach(ScoreBoard item in Score)
-{
-    <tr>
-      <td>El señor de los anillos</td>
-      <td>J. R. R. Tolkien</td>
-      <td>1954-1955</td>
-    </tr>
-}
+        <tbody class="text-light">
+        @foreach(ScoreBoard item in ViewBag.Score)
+        {
+            <tr>
+                <td>@item.Username</td>
+                <td>@item.Puntaje</td>
+                <td>@item.Dia</td>
+            </tr>
+        }
+        </tbody>
 
-
-  </tbody>
-
-</table>
+    </table>
+</div>

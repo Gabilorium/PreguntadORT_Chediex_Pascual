@@ -13,22 +13,22 @@ namespace PreguntadORT_Chediex_Pascual.Models
     {
         private int _idPuntaje;
         private string _username;
-        private int _puntajeActual;
-        private DateTime _fecha;
+        private int _puntaje;
+        private DateTime _dia;
 
-        public ScoreBoard(string username, int puntajeActual, DateTime fecha)
+        public ScoreBoard(string username, int puntaje, DateTime dia)
         {
             _username = username;
-            _puntajeActual = puntajeActual;
-            _fecha = fecha;
+            _puntaje = puntaje;
+            _dia = dia;
         }
 
         public ScoreBoard()
         {
             _username = "";
-            _puntajeActual = 0;
-            DateTime fecha = DateTime.Today;
-            _fecha = fecha;
+            _puntaje = 0;
+            DateTime _dia = new DateTime();
+           
         }
         public int IdPuntaje
         {
@@ -41,15 +41,15 @@ namespace PreguntadORT_Chediex_Pascual.Models
             set{_username = value;}
         }
 
-        public int PuntajeActual
+        public int Puntaje
         {
-            get{ return _puntajeActual;}
-            set{_puntajeActual = value;}
+            get{ return _puntaje;}
+            set{_puntaje = value;}
         }
-        public DateTime Fecha
+        public DateTime Dia
         {
-            get{ return _fecha;}
-            set{_fecha = value;}
+            get{ return _dia;}
+            set{_dia = value;}
         }
     }
 }
