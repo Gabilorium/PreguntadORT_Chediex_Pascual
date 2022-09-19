@@ -27,7 +27,7 @@ namespace PreguntadORT_Chediex_Pascual.Models
         {
             _username = "";
             _puntaje = 0;
-            DateTime _dia = new DateTime();
+            _dia = new DateTime();
            
         }
         public int IdPuntaje
