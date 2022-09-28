@@ -6,18 +6,17 @@ namespace PreguntadORT_Chediex_Pascual.Controllers;
 
 public class HomeController : Controller
 {
+    private IWebHostEnvironment Environment;
     private readonly ILogger<HomeController> _logger;
-
-    public HomeController(ILogger<HomeController> logger)
+    public HomeController(IWebHostEnvironment environment)
     {
-        _logger = logger;
+        Environment = environment;
     }
 
     public IActionResult Index()
     {
         return View();
     }
-
     public IActionResult ConfigurarJuego()
     {
         Juego.InicializarJuego();
@@ -60,6 +59,12 @@ public class HomeController : Controller
         ViewBag.Score = BD.ObtenerScoreBoard();
         return View("HighScores");
     }
+    public IActionResult ListaPreguntas()
+    {
+        ViewBag.Lista = Juego.ListaPreguntas;
+        ViewBag.Lista = BD.ObtenerPreguntas(-1,-1);
+        return View("HighScores");
+    }
     public IActionResult VerificarRespuesta(int IdPregunta, int IdRespuesta,int IdDificultad)
     {
         string opcCorrecta = "";
@@ -81,6 +86,31 @@ public class HomeController : Controller
             ViewBag.OpcCorrecta = opcCorrecta;
         }
         return View("Respuesta");
+    }
+    public IActionResult AgregarPreguntas(int IdPregunta)
+    {
+        ViewBag.IdPregunta = IdPregunta;
+        return View();
+    }
+    [HttpPost] 
+    public IActionResult  GuardadPregunta(int IdCategoria, int IdDificultad, string Enunciado, IFormFile Foto)
+    {  
+        if(Foto.Length > 0)
+        {
+            string wwwRootLocal = this.Environment.ContentRootPath + @"\wwwroot\Foto\" + Foto.FileName;
+            using( var stream = System.IO.File.Create(wwwRootLocal))
+            {
+                Foto.CopyToAsync(stream);
+            }
+        }
+        Preguntas preg = new Preguntas(IdCategoria, IdDificultad, Enunciado, ("" + Foto.FileName));
+        BD.AgregarPregunta(preg);
+        return RedirectToAction("Listapreguntas");
+    }
+    public IActionResult EliminarPregunta(int IdPregunta)
+    {
+        BD.EliminarPregunta(IdPregunta);
+        return RedirectToAction("Listapreguntas");
     }
     public IActionResult Privacy()
     {

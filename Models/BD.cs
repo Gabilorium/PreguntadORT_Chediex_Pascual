@@ -16,8 +16,7 @@ namespace PreguntadORT_Chediex_Pascual.Models{
         private static List<Dificultades> _ListaDificultades = new List<Dificultades>();
         private static List<ScoreBoard> _ListaScoreBoard = new List<ScoreBoard>();
         private static string _conectionString = 
-        @"Server=A-PHZ2-CEO-016; DataBase=PreguntadOrt;Trusted_Connection=True;";
-        public static List<Categorias>  ObtenerCategorias()
+        @"Server=A-PHZ2-CIDI-026; DataBase=PreguntadOrt;Trusted_Connection=True;";        public static List<Categorias>  ObtenerCategorias()
         {
             using(SqlConnection db = new SqlConnection(_conectionString))
             {
@@ -106,6 +105,22 @@ namespace PreguntadORT_Chediex_Pascual.Models{
                 _ListaScoreBoard = db.Query<ScoreBoard>(SQL).ToList();
             }
             return _ListaScoreBoard;
+        }
+        public static void AgregarPregunta(Preguntas preg)
+        {
+            string SQL = "INSERT INTO Preguntas(IdCategoria, IdDificultad, Enunciado, Foto) VALUES (@pCategoria, @pDificultad, @pEnunciado, @pfoto)";
+            using(SqlConnection db = new SqlConnection(_conectionString))
+            {
+                db.Execute(SQL, new{pCategoria = preg.IdCategoria, pDificultad = preg.IdDificultad, pEnunciado = preg.Enunciado, pfoto = preg.Foto});
+            }
+        }
+        public static void EliminarPregunta(int IdPregunta)
+        {
+            string SQL = "DELETE FROM Jugador WHERE IdPregunta = @pIdPregunta";
+            using(SqlConnection db = new SqlConnection(_conectionString))
+            {
+                db.Execute(SQL, new{pIdPregunta = IdPregunta});
+            }
         }
     }
 }

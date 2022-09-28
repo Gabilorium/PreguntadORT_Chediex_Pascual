@@ -30,10 +30,11 @@ document.addEventListener("click", e => {
   if (e.key == "Escape" && document.querySelector(".modal.is-visible")) {
     document.querySelector(".modal.is-visible").classList.remove(isVisible);
   }
-});*/
+});
 
 $('.openBtn').on('click',function(){
     $('.modal-body').load('ConfigurarJuego.cshtml',function(){
         $('#modal1').modal({show:true});
     });
 });
+*/
