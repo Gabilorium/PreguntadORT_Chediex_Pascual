@@ -94,10 +94,9 @@ public class HomeController : Controller
         ViewBag.ListaDificultad = Juego.ObtenerDificultades();
         return View();
     }
-    public IActionResult AgregarRespuestas(int IdRespuesta, int IdPregunta)
+    public IActionResult AgregarRespuestas(int IdPregunta)
     {
         ViewBag.IdPregunta = IdPregunta;
-        ViewBag.IdRespuesta = IdRespuesta;
         return View();
     }
     [HttpPost] 
@@ -113,7 +112,7 @@ public class HomeController : Controller
         }
         Preguntas preg = new Preguntas(IdCategoria, IdDificultad, Enunciado, ("" + Foto.FileName));
         BD.AgregarPregunta(preg);
-        return RedirectToAction("AgregarRespuestas" , new{IdPregunta = preg.IdPregunta});
+        return RedirectToAction("ListaPreguntas");
     }
     [HttpPost] 
     public IActionResult  GuardarRespuesta(int IdPregunta, string Contenido1, int Opcion1, int Correcta1 , string Contenido2, int Opcion2, int Correcta2, string Contenido3, int Opcion3, int Correcta3, string Contenido4, int Opcion4, int Correcta4)

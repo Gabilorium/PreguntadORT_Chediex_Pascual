@@ -21,7 +21,9 @@
             <td class="fuente2 text-light"> @p.Enunciado </td>
             <td class="fuente2 text-light"> @p.IdCategoria </td>
             <td class="fuente2 text-light"> @p.IdDificultad </td>
+            <td><a href='@Url.Action("AgregarRespuestas","Home", new{IdPregunta = p.IdPregunta})'class="colorFondo fuente2 btn btn-light text-center">Editar respuestas</a></td>
             <td><a href='@Url.Action("EliminarPregunta","Home", new{IdPregunta = p.IdPregunta})' class="btn btn-danger">Eliminar</a></td>
+            
         </tr>  
       } 
     </div>

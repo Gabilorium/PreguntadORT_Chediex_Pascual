@@ -109,11 +109,21 @@ namespace PreguntadORT_Chediex_Pascual.Models{
         }
         public static void AgregarPregunta(Preguntas preg)
         {
-            string SQL = "INSERT INTO Preguntas(IdCategoria, IdDificultad, Enunciado, Foto) VALUES (@pCategoria, @pDificultad, @pEnunciado, @pfoto)";
+            string SQL = "INSERT INTO Preguntas(IdCategoria, IdDificultad, Enunciado, Foto) VALUES (@pCategoria, @pDificultad, @pEnunciado, @pfoto); ";
             using(SqlConnection db = new SqlConnection(_conectionString))
             {
                 db.Execute(SQL, new{pCategoria = preg.IdCategoria, pDificultad = preg.IdDificultad, pEnunciado = preg.Enunciado, pfoto = preg.Foto});
             }
+            //select del maximo id (cambiar  SELECT SCOPE_IDENTITY())
+        }
+        public static int GetIdPregunta(Preguntas preg)
+        {
+            string SQL = "SELECT MAX(IdPRegunta) FROM Preguntas; ";
+            using(SqlConnection db = new SqlConnection(_conectionString))
+            {
+                return db.Execute(SQL);
+            }
+            //select del maximo id (cambiar  SELECT SCOPE_IDENTITY())
         }
         public static void AgregarRespuesta(Respuestas resp)
         {
@@ -125,7 +135,7 @@ namespace PreguntadORT_Chediex_Pascual.Models{
         }
         public static void EliminarPregunta(int IdPregunta)
         {
-            string SQL = "DELETE FROM Preguntas WHERE IdPregunta = @pIdPregunta; DELETE FROM Respuestas WHERE IdPregunta = @pIdPregunta";
+            string SQL = "DELETE FROM Preguntas WHERE IdPregunta = @pIdPregunta;";
             using(SqlConnection db = new SqlConnection(_conectionString))
             {
                 db.Execute(SQL, new{pIdPregunta = IdPregunta});
