@@ -1,0 +1,36 @@
+@{
+    ViewData["Title"] = "Agregar preguntas";
+}
+
+<div class="text-center">
+    <h1 class="fuente display-4">Agregue una nueva pregunta</h1>
+</div>
+
+<form action='@Url.Action("GuardarPregunta","Home")' method="Post" enctype="multipart/form-data">
+    <div class="form-group text-light">
+        <input class="form-control" type="hidden" name="IdPregunta" value="@ViewBag.IdPregunta">
+ 
+        <h1 class="fuente mb-4">Ingrese el nombre de usuario</h1>
+        <input type="text" class="form-control" placeholder="Pregunta..." name="Enunciado" required>
+        
+        <br>
+        
+        <h1 class="fuente mt-4 mb-2">Categoria</h1>
+        @foreach(Categorias p in ViewBag.ListaCategoria)
+        {
+            <h2 class="fuente"><input type="radio" name="IdCategoria" value="@p.IdCategoria" required/><label>@p.Nombre</label></h2>
+        }
+
+        <br>
+
+        <h1 class="fuente mt-4 mb-2">Dificultad</h1>
+        @foreach(Dificultades p in ViewBag.ListaDificultad)
+        {
+            <h2 class="fuente"><input type="radio" name="IdDificultad" value="@p.IdDificultad" required/><label>@p.Nombre</label></h2>
+        }
+
+        <br>
+
+        <button type="submit" class="btn-primary">Crear la pregunta</button>
+    </div>
+</form>

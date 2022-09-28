@@ -1,0 +1,36 @@
+@{
+    ViewData["Title"] = "Lista de preguntas";
+}
+
+<div class="text-center">
+    <h1 class="fuente display-4 mb-5">Preguntas del juego</h1>
+</div>
+    <table class="table table-striped Size">
+
+    <thead>
+        <td class="text-light fuente2">Enunciado</td>
+        <td class="text-light fuente2">Categoria</td>
+        <td class="text-light fuente2">Dificultad</td>
+    </thead>
+
+    <div class="text-light">
+      @foreach(Jugador P in @ViewBag.Lista)
+      {
+        <tr>
+            <td class="fuente2"> p.Enunciado </td>
+            <td class="fuente2"> p.Categoria </td>
+            <td class="fuente2"> p.Dificultad </td>
+            <td><a href='@Url.Action("EliminarPregunta","Home", new{IdPregunta=p.IdPregunta})' class="btn btn-danger">Eliminar</a></td>
+        </tr>  
+      } 
+    </div>
+    </table>
+ 
+    <a href='@Url.Action("AgregarPregunta","Home", new{IdPregunta=@ViewBag.DetalleEquipo.IdEquipo})' class="btn btn-primary">Agregar una pregunta</a>
+</div>
+
+  <div class="col-6 mb-5 " style="float:right;">
+   
+
+</div>
+</div>

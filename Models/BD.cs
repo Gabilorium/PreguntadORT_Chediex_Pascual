@@ -16,7 +16,7 @@ namespace PreguntadORT_Chediex_Pascual.Models{
         private static List<Dificultades> _ListaDificultades = new List<Dificultades>();
         private static List<ScoreBoard> _ListaScoreBoard = new List<ScoreBoard>();
         private static string _conectionString = 
-        @"Server=A-PHZ2-CEO-016; DataBase=PreguntadOrt;Trusted_Connection=True;";
+        @"Server=A-PHZ2-CIDI-026; DataBase=PreguntadOrt;Trusted_Connection=True;";
         public static List<Categorias>  ObtenerCategorias()
         {
             using(SqlConnection db = new SqlConnection(_conectionString))
