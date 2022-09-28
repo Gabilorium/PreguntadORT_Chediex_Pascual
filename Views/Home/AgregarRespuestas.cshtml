@@ -1,0 +1,63 @@
+@{
+    ViewData["Title"] = "Agregar preguntas";
+}
+
+<div class="text-center">
+    <h1 class="fuente display-4">Agregue las respuestas de la pregunta creada</h1>
+</div>
+
+<form action='@Url.Action("GuardarRespuesta","Home")' method="Post" enctype="multipart/form-data">
+    <div class="form-group text-light">
+        <input class="form-control" type="hidden" name="IdPregunta" value="@ViewBag.IdPregunta">
+ 
+        <h1 class="fuente mb-4">Ingrese el primer contenido de la pregunta</h1>
+        <input type="text" class="form-control" placeholder="Contenido..." name="Contenido1" autocomplete="off" required>
+        <input type="hidden" name="Opcion1" value="1">
+        <h3 class= "fuente2">Es correcta?</h3>
+        <h2>
+        <input type="radio" name="Correcta1" value="1"/><label>Si</label>
+        <br/>
+        <input type="radio" name="Correcta1" value="0"/><label>No</label>
+        </h2>
+
+        <br>
+
+        <h1 class="fuente mb-4">Ingrese el segundo contenido de la pregunta</h1>
+        <input type="text" class="form-control" placeholder="Contenido..." name="Contenido2" autocomplete="off" required>
+        <input type="hidden" name="Opcion2" value="2">
+        <h3 class= "fuente2">Es correcta?</h3>
+        <h2>
+        <input type="radio" name="Correcta2" value="1"/><label>Si</label>
+        <br/>
+        <input type="radio" name="Correcta2" value="0"/><label>No</label>
+        </h2>
+
+        <br>
+
+        <h1 class="fuente mb-4">Ingrese el tercer contenido de la pregunta</h1>
+        <input type="text" class="form-control" placeholder="Contenido..." name="Contenido3" autocomplete="off" required>
+        <input type="hidden" name="Opcion3" value="3">
+        <h3 class= "fuente2">Es correcta?</h3>
+        <h2>
+        <input type="radio" name="Correcta3" value="1"/><label>Si</label>
+        <br/>
+        <input type="radio" name="Correcta3" value="0"/><label>No</label>
+        </h2>
+
+        <br>
+
+        <h1 class="fuente mb-4">Ingrese el cuarto contenido de la pregunta</h1>
+        <input type="text" class="form-control" placeholder="Contenido..." name="Contenido4" autocomplete="off" required>
+        <input type="hidden" name="Opcion4" value="4">
+        <h3 class= "fuente2">Es correcta?</h3>
+        <h2>
+        <input type="radio" name="Correcta4" value="1"/><label>Si</label>
+        <br/>
+        <input type="radio" name="Correcta4" value="0"/><label>No</label>
+        </h2>
+
+        <br>
+
+        <button type="submit" class="btn-primary">Crear respuesta</button>
+    </div>
+</form>

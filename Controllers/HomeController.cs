@@ -61,9 +61,9 @@ public class HomeController : Controller
     }
     public IActionResult ListaPreguntas()
     {
-        ViewBag.Lista = Juego.ListaPreguntas;
+        //ViewBag.Lista = Juego.ListaPreguntas;
         ViewBag.Lista = BD.ObtenerPreguntas(-1,-1);
-        return View("HighScores");
+        return View();
     }
     public IActionResult VerificarRespuesta(int IdPregunta, int IdRespuesta,int IdDificultad)
     {
@@ -87,17 +87,25 @@ public class HomeController : Controller
         }
         return View("Respuesta");
     }
-    public IActionResult AgregarPreguntas(int IdPregunta)
+    public IActionResult AgregarPreguntas(int IdPregunta, int IdDificultad, int IdCategoria, int IdRespuesta)
     {
         ViewBag.IdPregunta = IdPregunta;
+        ViewBag.ListaCategoria = Juego.ObtenerCategorias();
+        ViewBag.ListaDificultad = Juego.ObtenerDificultades();
+        return View();
+    }
+    public IActionResult AgregarRespuestas(int IdRespuesta, int IdPregunta)
+    {
+        ViewBag.IdPregunta = IdPregunta;
+        ViewBag.IdRespuesta = IdRespuesta;
         return View();
     }
     [HttpPost] 
-    public IActionResult  GuardadPregunta(int IdCategoria, int IdDificultad, string Enunciado, IFormFile Foto)
+    public IActionResult  GuardarPregunta(int IdCategoria, int IdDificultad, string Enunciado, IFormFile Foto)
     {  
         if(Foto.Length > 0)
         {
-            string wwwRootLocal = this.Environment.ContentRootPath + @"\wwwroot\Foto\" + Foto.FileName;
+            string wwwRootLocal = this.Environment.ContentRootPath + @"\wwwroot\Imagenes\" + Foto.FileName;
             using( var stream = System.IO.File.Create(wwwRootLocal))
             {
                 Foto.CopyToAsync(stream);
@@ -105,7 +113,41 @@ public class HomeController : Controller
         }
         Preguntas preg = new Preguntas(IdCategoria, IdDificultad, Enunciado, ("" + Foto.FileName));
         BD.AgregarPregunta(preg);
-        return RedirectToAction("Listapreguntas");
+        return RedirectToAction("AgregarRespuestas" , new{IdPregunta = preg.IdPregunta});
+    }
+    [HttpPost] 
+    public IActionResult  GuardarRespuesta(int IdPregunta, string Contenido1, int Opcion1, int Correcta1 , string Contenido2, int Opcion2, int Correcta2, string Contenido3, int Opcion3, int Correcta3, string Contenido4, int Opcion4, int Correcta4)
+    {
+
+
+        Respuestas resp1 = new Respuestas(IdPregunta, Opcion1, Contenido1, false);
+        Respuestas resp2 = new Respuestas(IdPregunta, Opcion2, Contenido2, false);
+        Respuestas resp3 = new Respuestas(IdPregunta, Opcion3, Contenido3, false);
+        Respuestas resp4 = new Respuestas(IdPregunta, Opcion4, Contenido4, false);
+
+        if(Correcta1 == 1)
+        {
+            resp1 = new Respuestas(IdPregunta, Opcion1, Contenido1, true);
+        }
+        if(Correcta2 == 1)
+        {
+            resp2 = new Respuestas(IdPregunta, Opcion1, Contenido1, true);
+        }
+        if(Correcta3 == 1)
+        {
+            resp3 = new Respuestas(IdPregunta, Opcion1, Contenido1, true);
+        }
+        if(Correcta4 == 1)
+        {
+            resp4 = new Respuestas(IdPregunta, Opcion1, Contenido1, true);
+        }
+
+        BD.AgregarRespuesta(resp1);
+        BD.AgregarRespuesta(resp2);
+        BD.AgregarRespuesta(resp3);
+        BD.AgregarRespuesta(resp4);
+        
+        return RedirectToAction("ListaPreguntas");
     }
     public IActionResult EliminarPregunta(int IdPregunta)
     {

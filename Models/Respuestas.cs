@@ -17,13 +17,12 @@ namespace PreguntadORT_Chediex_Pascual.Models{
         private bool _correcta;
         private string _foto;
 
-        public Respuestas(int idPregunta, int opcion, string contenido, bool correcta, string foto)
+        public Respuestas(int idPregunta, int opcion, string contenido, bool correcta)
         {
             _idPregunta = idPregunta;
             _opcion = opcion;
             _contenido = contenido;
             _correcta = correcta;
-            _foto = foto;
         }
 
         public Respuestas()
